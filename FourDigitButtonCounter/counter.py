@@ -155,24 +155,37 @@ def display(number):
     displayString = str(number)
     if number < 10:
         numbers[number]()
-    if number >= 10:
+    if number >= 10 and number < 100:
         enableDigit(3)
         numbers[int(displayString[0])]()
-        usleep(5000)
+        usleep(8500)
         enableDigit(4)
         numbers[int(displayString[1])]()    
-	usleep(5000)
-    if number >= 100:
+	usleep(8500)
+    if number >= 100 and number < 1000:
         enableDigit(2)
         numbers[int(displayString[0])]()
-        usleep(5000)
+        usleep(8500)
         enableDigit(3)
         numbers[int(displayString[1])]()
-        usleep(5000)
+        usleep(8500)
         enableDigit(4)
         numbers[int(displayString[2])]()    
-	usleep(5000)
- 
+	usleep(8500)
+    if number >= 1000:
+        enableDigit(1)
+        numbers[int(displayString[0])]()
+        usleep(8500)
+        enableDigit(2)
+        numbers[int(displayString[1])]()
+        usleep(8500)
+        enableDigit(3)
+        numbers[int(displayString[2])]()    
+	usleep(8500)
+	enableDigit(4)
+        numbers[int(displayString[3])]()    
+	usleep(8500)
+	 
 def increment():
     global currentNumber
     if currentNumber == 9999:
