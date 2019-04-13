@@ -3,6 +3,9 @@ from time import sleep
 from signal import pause
 from threading import Thread
 
+MAX_NUMBER = 9999
+DISPLAY_SIZE = 4
+
 usleep = lambda x: sleep(x/1000000.0)
 
 button = Button(22)
@@ -153,42 +156,16 @@ def enableDigit(digit):
 
 def display(number):
     displayString = str(number)
-    if number < 10:
-        numbers[number]()
-    if number >= 10 and number < 100:
-        enableDigit(3)
-        numbers[int(displayString[0])]()
+    digitNumber = DISPLAY_SIZE - len(displayString) + 1
+    for index in range(0, len(displayString)):
+        enableDigit(digitNumber)
+        numbers[int(displayString[index])]()
         usleep(8500)
-        enableDigit(4)
-        numbers[int(displayString[1])]()    
-	usleep(8500)
-    if number >= 100 and number < 1000:
-        enableDigit(2)
-        numbers[int(displayString[0])]()
-        usleep(8500)
-        enableDigit(3)
-        numbers[int(displayString[1])]()
-        usleep(8500)
-        enableDigit(4)
-        numbers[int(displayString[2])]()    
-	usleep(8500)
-    if number >= 1000:
-        enableDigit(1)
-        numbers[int(displayString[0])]()
-        usleep(8500)
-        enableDigit(2)
-        numbers[int(displayString[1])]()
-        usleep(8500)
-        enableDigit(3)
-        numbers[int(displayString[2])]()    
-	usleep(8500)
-	enableDigit(4)
-        numbers[int(displayString[3])]()    
-	usleep(8500)
-	 
+        digitNumber = digitNumber + 1
+
 def increment():
     global currentNumber
-    if currentNumber == 9999:
+    if currentNumber == MAX_NUMBER:
         currentNumber = 0
     else:
         currentNumber = currentNumber + 1
